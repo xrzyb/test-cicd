@@ -4,6 +4,10 @@ const props = withDefaults(defineProps<{
 }>(), {
   name: 'World'
 })
+
+// 下面两行仅用于验证 trim-plugin，build 后 dist 里不应出现
+console.log('HelloWorld mounted, name =', props.name)
+debugger
 </script>
 
 <template>

@@ -5,6 +5,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { buildReportPlugin } from './plugins/build-report.reference'
+import { trimPlugin } from './plugins/trim'
 const projectRoot = fileURLToPath(new URL('.', import.meta.url))
 
 /** 将 transform 收到的 code 写到调试目录（id 在 Vite 里通常是绝对路径，不能和 __dirname 再拼） */
@@ -102,5 +103,11 @@ const buildSourceMapPlugin=():Plugin=>{
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [ sourceMapPlugin(),vue(),buildSourceMapPlugin(),buildReportPlugin()],
+  plugins: [
+    sourceMapPlugin(),
+    vue(),
+    buildSourceMapPlugin(),
+    buildReportPlugin(),
+    trimPlugin({ verbose: true }),
+  ],
 })
